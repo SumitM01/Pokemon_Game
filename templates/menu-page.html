@@ -1,0 +1,122 @@
+l<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/menu.css ">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="transition">
+            <div class="cover cover1"></div> 
+            <div class="cover cover2"></div>
+            <div class="cover cover3"></div>
+        </div>
+        <div class="menu">
+            <ul>
+                <li style="--i:4"><a data-bs-toggle="modal" data-bs-target="#staticBackdrop1">NEW GAME</a></li>
+                <li style="--i:3"><a data-bs-toggle="modal" data-bs-target="#staticBackdrop2">LOAD GAME</a></li>
+                <li style="--i:2"><a data-bs-toggle="modal" data-bs-target="#staticBackdrop3">HIGH SCORE</a></li>
+                <li style="--i:1"><a href="/">QUIT</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color:red; font-size:x-large">
+              <h5 class="modal-title" id="staticBackdropLabel">Pokemon Game using JS</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="background-color:black;color: white;">
+              <form action="addplayer" method='post'>
+                {% csrf_token %}
+                Player Name: <input name="name">
+                <input type="submit" value="Play" class="btn btn-danger">
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color:red; font-size:x-large">
+            <h5 class="modal-title" id="staticBackdropLabel">Player Management / Load Game</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" style="background-color:black;color: white;">
+              <table class="table table-bordered table-active">
+                  <thead style="color:yellow">
+                      <th>Id</th>
+                      <th>Player Name</th>
+                      <th>Delete</th>
+                      <th>Play</th>
+                  </thead>
+                  <tbody style="color:white">
+                    {% for x in player %}
+                    <tr>
+                        <td>{{x.id}}</td>
+                        <td>{{x.name}}</td>
+                        <td><a href="delete/{{x.id}}"><button>Delete</button></a></td>
+                        <td><a href="continuegame/{{x.id}}"><button>Continue Game</button></a></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+  </div> 
+
+    <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color:red; font-size:x-large">
+              <h5 class="modal-title" id="staticBackdropLabel">Player Scores Table</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="background-color:black;color: white;">
+                <table class="table table-bordered table-active">
+                    <thead style="color:yellow">
+                        <th>Id</th>
+                        <th>Player Name</th>
+                        <th>High Score</th>
+                    </thead>
+                    <tbody style="color:white">
+                      {% for x in player %}
+                        <tr>
+                          <td>{{x.id}}</td>
+                          <td>{{x.name}}</td>
+                          <td>{{x.score}}</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- <script>
+        const link = document.querySelector(".link");
+        const transition = document.querySelector(".transition");
+        link.addEventListener("click", (e) => {
+        e.preventDefault();
+        transition.classList.add("slide");
+        setTimeout(() => {
+            window.location = link.href;
+        }, 700);
+        });
+    </script> -->
+</body>
+</html>
+<!-- Button trigger modal -->
+  
+  <!-- Modal -->
+  

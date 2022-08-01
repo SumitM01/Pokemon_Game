@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon</title>
+</head>
+<body>
+    <style>
+        body{
+            background-image: url('/static/img/starting_page.png');
+            background-repeat: no-repeat;
+            background-size: 1510px 740px ;
+        }
+        .key{
+            font-size:15px; 
+            position:absolute;
+            bottom:50px; 
+            width: 95%; 
+            text-align: center;
+            color: white;
+        }
+
+
+    </style>
+    <div class="key" id="blink"><b>PRESS ANY KEY TO CONTINUE</b></div>
+    <script type="text/javascript">
+        var blink = 
+            document.getElementById('blink');
+  
+        setInterval(function () {
+            blink.style.opacity = 
+            (blink.style.opacity == 0 ? 1 : 0);
+        }, 750); 
+        document.addEventListener("keydown", (e) => {
+        e.preventDefault();
+        setTimeout(() => {
+            window.location = "/menu-page";
+        }, 700);
+        });
+    </script>
+</body>
+</html>
